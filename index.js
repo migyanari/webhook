@@ -146,12 +146,12 @@ app.post("/webhook", express.json(), function (req, res) {
     }
 
     function handleDeleteFromMySQL(agent) {
-        const last_name = agent.parameters.apellidos.lastName;
+        const last_name = agent.parameters.apellidos.name;
         return connectToDatabase()
             .then(connection => {
                 return deleteFromDatabase(connection, last_name)
                     .then(result => {
-                        agent.add('Eliminado el veterinario con el apellido ' + data.last_name);
+                        agent.add('Eliminado el veterinario con el apellido ' + last_name);
                         connection.end();
                     });
             });
